@@ -1,5 +1,7 @@
 # S3io
 
+[![Build Status](https://travis-ci.org/fiksu/s3io.png)](https://travis-ci.org/fiksu/s3io)
+
 An IO-compatible wrapper for S3.
 
 Amazon's official AWS SDK provides an API for S3 that isn't compatible with Ruby's standard IO class and its derivatives. This gem provides a thin wrapper around AWS SDK that makes it possible to access objects stored on S3 as if they were instances of File or StringIO classes.
