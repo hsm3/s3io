@@ -4,5 +4,10 @@ source 'https://rubygems.org'
 gemspec
 
 gem "rake"
-gem "yard", :group => :development
-gem "redcarpet", :group => :development
+
+group :development do
+  platforms :ruby do
+    gem "yard"
+    gem "redcarpet"
+  end
+end
