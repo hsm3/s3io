@@ -44,7 +44,7 @@ class S3ioWrapperTest < Test::Unit::TestCase
     wrapper = S3io::Wrapper.new(@s3object)
 
     assert_equal(S3_TEST_DATA[0..99], wrapper.read(100))
-    assert_equal(S3_TEST_DATA[100.100], wrapper.read(1))
+    assert_equal(S3_TEST_DATA[100..100], wrapper.read(1))
   end
 
   def test_s3io_wrapper_each
