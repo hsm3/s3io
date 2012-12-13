@@ -30,7 +30,7 @@ Once wrapped, S3 objects behave the way you'd expect from an ordinary IO object.
     require 's3io'
 
     s3_object = S3.buckets['some-bucket'].objects['path/to/object']
-    io = S3io.new(s3object)
+    io = S3io.new(s3_object)
 
     first_100_bytes = io.read(100) # reading first 100 bytes
 
