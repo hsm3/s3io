@@ -25,12 +25,13 @@ Or install it yourself as:
 ## Usage
 
 Once wrapped, S3 objects behave the way you'd expect from an ordinary IO object.
+It can read:
 
     require 'aws-sdk'
     require 's3io'
 
     s3_object = S3.buckets['some-bucket'].objects['path/to/object']
-    io = S3io.new(s3_object)
+    io = S3io.open(s3_object, 'r')
 
     first_100_bytes = io.read(100) # reading first 100 bytes
 
@@ -44,9 +45,22 @@ Once wrapped, S3 objects behave the way you'd expect from an ordinary IO object.
 
     puts io.read # and print everything from that byte to the end
 
+
+It can write:
+
+    require 'aws-sdk'
+    require 's3io'
+
+    s3_object = S3.buckets['some-bucket'].objects['path/to/object']
+
+    S3io.open(s3_object, 'w') do |s3io|
+      io.write 'abc'
+      io.write 'def'
+    end
+
 ## To do
 
-* Write support
+* Code documentation
 
 ## Contributing
 
