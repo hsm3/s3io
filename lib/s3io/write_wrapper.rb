@@ -48,7 +48,7 @@ module S3io
       return if @write_buffer.empty?
 
       @multipart_upload.add_part(@write_buffer)
-      @write_buffer.clear
+      @write_buffer.replace '' # String#clear isn't available on 1.8.x
 
       return nil
     end
@@ -57,7 +57,6 @@ module S3io
       self.flush
       @multipart_upload.close
       @multipart_upload = nil
-      @write_buffer.clear
 
       super
     end
