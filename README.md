@@ -8,6 +8,10 @@ Amazon's official AWS SDK provides an API for S3 that isn't compatible with Ruby
 
 Currently only reads are supported with writes support coming soon.
 
+## Warning
+
+Reads currently don't guarantee consistency if S3 file changes while being streamed. I plan to solve this, but meanwhile please keep in mind that you may read garbage if you replace S3 file while streaming it.
+
 ## Installation
 
 Add this line to your application's Gemfile:
@@ -61,6 +65,7 @@ It can write:
 ## To do
 
 * Code documentation
+* Fix an issue where S3 file that is updated while read streaming happens may result in garbage being read
 
 ## Contributing
 
