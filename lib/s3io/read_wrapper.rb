@@ -82,5 +82,13 @@ module S3io
     alias lines each
     alias each_line each
 
+    # @param [String] separator line separator string
+    def gets(separator = $/)
+      @_gets ||= enum_for(:each, separator)
+      @_gets.next
+    rescue StopIteration
+      nil
+    end
+
   end
 end
