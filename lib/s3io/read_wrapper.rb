@@ -82,10 +82,25 @@ module S3io
     alias lines each
     alias each_line each
 
-    # @param [String] separator line separator string
-    def gets(separator = $/)
+    # Returns strings line by line.  Optional params are a separator and length limit.
+    def gets(*args)
+      if args.count == 0
+        separator = $/
+        limit = nil
+      elsif args.count == 1 && args[0].kind_of?(Integer)
+        separator = $/
+        limit = args[0]
+      elsif args.count == 1
+        separator = args[0] ? args[0] : $/
+        limit = nil
+      elsif args.count == 2
+        separator = args[0] ? args[0] : $/
+        limit = args[1]
+      else
+        raise ArgumentError.new('Incorrect number of  arguments')
+      end
       @_gets ||= enum_for(:each, separator)
-      @_gets.next
+      limit ? @_gets.next.byteslice(0, limit) : @_gets.next
     rescue StopIteration
       nil
     end

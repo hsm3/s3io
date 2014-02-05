@@ -153,4 +153,37 @@ class S3ioReadWrapperTest < Test::Unit::TestCase
 
     assert_equal(S3_TEST_DATA.lines.to_a, lines)
   end
+
+  def test_gets_with_sep
+    wrapper = S3io::ReadWrapper.new(@s3object)
+
+    lines = []
+    while line = wrapper.gets("\n")
+      lines << line
+    end
+
+    assert_equal(S3_TEST_DATA.lines.to_a, lines)
+  end
+
+  def test_gets_with_limit
+    wrapper = S3io::ReadWrapper.new(@s3object)
+
+    lines = []
+    while line = wrapper.gets(10)
+      lines << line
+    end
+
+    assert_equal(S3_TEST_DATA.lines.map {|s| s.byteslice(0, 10)}.to_a, lines)
+  end
+
+  def test_gets_with_sep_and_limit
+    wrapper = S3io::ReadWrapper.new(@s3object)
+
+    lines = []
+    while line = wrapper.gets("\n", 10)
+      lines << line
+    end
+
+    assert_equal(S3_TEST_DATA.lines.map {|s| s.byteslice(0, 10)}.to_a, lines)
+  end
 end
